@@ -10,7 +10,7 @@ const Login = () => {
     const navigate = useNavigate();
 
     const location = useLocation();
-    const from = location.state?.from?.pathname || '/';
+    const from = location.state?.from?.pathname || '/'; // pathname from location
 
     const handleSingIn = (event) => {
         event.preventDefault();
@@ -26,7 +26,7 @@ const Login = () => {
                 setSuccess(true);
                 form.reset();
                 navigate(from, {replace:true})
-                console.log(user);
+                // console.log(user);
             })
             .catch(error => console.error(error))
 
