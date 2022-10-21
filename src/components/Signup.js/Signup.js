@@ -1,5 +1,5 @@
 import React, { useContext, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { FcGoogle } from 'react-icons/fc';
 import { AuthContext } from '../context/UserContecxt';
 
@@ -7,6 +7,10 @@ const Signup = () => {
     const [confirm, setConfirm] = useState(false);
 
     const { createUser, signInWithGoogle } = useContext(AuthContext);
+
+    const navigate = useNavigate ();
+    const location = useLocation();
+    const from = location.state?.from?.pathname || '/'; // pathname from location
 
     const handleSignIn = (event) => {
         event.preventDefault();
@@ -25,7 +29,8 @@ const Signup = () => {
                 .then(result => {
                     const user = result.user;
                     form.reset();
-                    console.log(user);
+                    navigate(from, { replace: true })//important line of code
+                    // console.log(user);
                 })
                 .catch(error => console.log(error));
         }
@@ -36,6 +41,7 @@ const Signup = () => {
         signInWithGoogle()
             .then(result => {
                 const user = result.user;
+                navigate(from, { replace: true })//important line of code
             })
             .catch(error => console.error(error))
     }

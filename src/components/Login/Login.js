@@ -7,8 +7,8 @@ const Login = () => {
 
     const [success, setSuccess] = useState(false);
     const { signInUser, signInWithGoogle } = useContext(AuthContext);
-    const navigate = useNavigate();
 
+    const navigate = useNavigate();
     const location = useLocation();
     const from = location.state?.from?.pathname || '/'; // pathname from location
 
@@ -25,7 +25,8 @@ const Login = () => {
                 const user = result.user;
                 setSuccess(true);
                 form.reset();
-                navigate(from, { replace: true })//important line of code
+                // navigate(from, { replace: true })//important line of code
+                navigate('/')//important line of code
                 // console.log(user);
             })
             .catch(error => console.error(error))
@@ -36,7 +37,8 @@ const Login = () => {
         signInWithGoogle()
             .then(result => {
                 const user = result.user;
-                navigate(from, { replace: true })//important line of code
+                navigate('/')//important line of code
+                // navigate(from, { replace: true })//important line of code
             })
             .catch(error => console.error(error))
     }
