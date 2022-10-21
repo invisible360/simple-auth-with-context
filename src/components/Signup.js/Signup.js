@@ -6,7 +6,7 @@ import { AuthContext } from '../context/UserContecxt';
 const Signup = () => {
     const [confirm, setConfirm] = useState(false);
 
-    const { createUser } = useContext(AuthContext);
+    const { createUser, signInWithGoogle } = useContext(AuthContext);
 
     const handleSignIn = (event) => {
         event.preventDefault();
@@ -31,6 +31,15 @@ const Signup = () => {
         }
 
     }
+
+    const handleSignInWithGoogle = () => {
+        signInWithGoogle()
+            .then(result => {
+                const user = result.user;
+            })
+            .catch(error => console.error(error))
+    }
+
 
     return (
         <div>
@@ -70,7 +79,7 @@ const Signup = () => {
                                 <p>Already have an account? <Link to='/login' className="link link-hover">Login</Link></p>
                             </label>
                             <p className='text-center'>Or</p>
-                            <button className='btn'><FcGoogle /><span className='ml-2'>Continue With Google</span></button>
+                            <button onClick={handleSignInWithGoogle} className='btn'><FcGoogle /><span className='ml-2'>Continue With Google</span></button>
                         </div>
                     </form>
                 </div>

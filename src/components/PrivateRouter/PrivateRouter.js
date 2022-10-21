@@ -4,7 +4,7 @@ import { AuthContext } from '../context/UserContecxt';
 
 const PrivateRouter = ({ children }) => {
     const { user, loading } = useContext(AuthContext);
-    const location =useLocation ();
+    const location = useLocation();
     if (loading) {
         // console.log ('yes loading found')
         return <div>Loading...</div>

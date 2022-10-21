@@ -6,7 +6,7 @@ import { AuthContext } from '../context/UserContecxt';
 const Login = () => {
 
     const [success, setSuccess] = useState(false);
-    const { signInUser } = useContext(AuthContext);
+    const { signInUser, signInWithGoogle } = useContext(AuthContext);
     const navigate = useNavigate();
 
     const location = useLocation();
@@ -25,11 +25,20 @@ const Login = () => {
                 const user = result.user;
                 setSuccess(true);
                 form.reset();
-                navigate(from, {replace:true})
+                navigate(from, { replace: true })//important line of code
                 // console.log(user);
             })
             .catch(error => console.error(error))
 
+    }
+
+    const handleSignInWithGoogle = () => {
+        signInWithGoogle()
+            .then(result => {
+                const user = result.user;
+                navigate(from, { replace: true })//important line of code
+            })
+            .catch(error => console.error(error))
     }
 
     return (
@@ -66,7 +75,7 @@ const Login = () => {
                                 <p>New to this website? <Link to='/signup' className="link link-hover">Create New Account</Link></p>
                             </label>
                             <p className='text-center'>Or</p>
-                            <button className='btn'><FcGoogle /><span className='ml-2'>Continue With Google</span></button>
+                            <button onClick={handleSignInWithGoogle} className='btn'><FcGoogle /><span className='ml-2'>Continue With Google</span></button>
                         </div>
                     </form>
                 </div>
